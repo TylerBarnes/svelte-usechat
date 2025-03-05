@@ -1,8 +1,8 @@
-import { anthropic } from "@ai-sdk/anthropic";
 import { Agent } from "@mastra/core/agent";
 
 import { weatherTool } from "./tools";
 import { Memory } from "@mastra/memory";
+import { openai } from "@ai-sdk/openai";
 
 export const weatherAgent = new Agent({
   name: "Weather Agent",
@@ -17,7 +17,7 @@ export const weatherAgent = new Agent({
 
       Use the weatherTool to fetch current weather data.
 `,
-  model: anthropic("claude-3-5-sonnet-20241022"),
+  model: openai("gpt-4o-mini"),
   tools: { weatherTool },
   memory: new Memory({
     options: {
