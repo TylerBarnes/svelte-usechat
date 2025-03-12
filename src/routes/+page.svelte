@@ -1,8 +1,13 @@
 <script>
-  import { useChat } from '@ai-sdk/svelte';
-  
-  const { messages, input, handleSubmit, error } = useChat({
-    api: '/api/chat'
+  import { useChat } from "@ai-sdk/svelte";
+
+  const { messages, input, handleSubmit } = useChat({
+    api: "api/chat",
+    maxSteps: 5,
+    onToolCall: ({ toolCall }) => {
+      console.log(toolCall);
+      return "Success";
+    },
   });
 </script>
 
@@ -12,7 +17,7 @@
       {message.content}
     </div>
   {/each}
-  
+
   <form on:submit|preventDefault={handleSubmit}>
     <input bind:value={$input} />
     <button type="submit">Send</button>
