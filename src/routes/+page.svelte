@@ -4,9 +4,17 @@
   const { messages, input, handleSubmit } = useChat({
     api: "api/chat",
     maxSteps: 5,
-    onToolCall: ({ toolCall }) => {
+    onToolCall: async ({ toolCall }) => {
       console.log(toolCall);
-      return "Success";
+      if (toolCall.toolName === `readClipboard`) {
+        try {
+          const clipboardText = await navigator.clipboard.readText();
+          return clipboardText;
+        } catch (error) {
+          console.error("Failed to read clipboard:", error);
+          return "Failed to read clipboard. Make sure you granted permission.";
+        }
+      }
     },
   });
 </script>
