@@ -33,8 +33,9 @@
     "@ai-sdk/anthropic": "^1.1.15",
     "@ai-sdk/openai": "^1.2.1",
     "@ai-sdk/svelte": "^1.1.21",
-    "@mastra/core": "alpha",
-    "@mastra/memory": "alpha",
+    "@mastra/client-js": "^0.1.11",
+    "@mastra/core": "^0.6.3",
+    "@mastra/memory": "^0.2.4",
     "ai": "^4.1.53",
     "zod": "^3.24.2"
   }

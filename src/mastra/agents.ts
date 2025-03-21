@@ -9,6 +9,12 @@ export const readClipboard = createTool({
 });
 
 const memory = new Memory({
+  options: {
+    workingMemory: {
+      enabled: true,
+      use: "tool-call", // Required for toDataStream() compatibility
+    },
+  },
   embedder: openai.embedding("text-embedding-3-small"),
 });
 
