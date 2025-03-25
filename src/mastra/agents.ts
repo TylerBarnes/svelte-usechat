@@ -2,6 +2,7 @@ import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
 import { openai } from "@ai-sdk/openai";
 import { createTool } from "@mastra/core";
+import { weatherTool } from "./tools";
 
 export const readClipboard = createTool({
   id: "readClipboard",
@@ -14,6 +15,9 @@ const memory = new Memory({
       enabled: true,
       use: "tool-call", // Required for toDataStream() compatibility
     },
+    threads: {
+      generateTitle: false,
+    },
   },
   embedder: openai.embedding("text-embedding-3-small"),
 });
@@ -24,6 +28,6 @@ export const weatherAgent = new Agent({
       You are a helpful assistant
 `,
   model: openai("gpt-4o-mini"),
-  tools: { readClipboard },
+  tools: { readClipboard, getWeather: weatherTool },
   memory,
 });
